@@ -1,0 +1,4 @@
+<permissions>
+    <library name="amazon.test.mozartclient"
+        file="/system/framework/MozartClientAPI.jar"/>
+</permissions>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<permissions>
+    <!-- By declaring the feature amazon.speech.tcommdownchannel here
+    The api PackageManager.hasSystemFeature(String feature) will
+    return true if passed the String "amazon.speech.tcommdownchannel".-->
+    <feature name="amazon.speech.tcommdownchannel" />
+</permissions>

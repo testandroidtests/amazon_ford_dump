@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<permissions>
+    <library name="com.amazon.device.home"
+        file="/system/framework/com.amazon.device.home.jar"/>
+
+    <feature name="com.amazon.software.home"/>
+
+</permissions>

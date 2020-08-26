@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<permissions>
+    <!-- These are packages that are still granted internet
+         access while the device is in power save mode. Here
+         I have allowed the amazon.critical.sample.backgroud
+         this ability -->
+    <allow-in-power-save package="com.amazon.device.software.ota" />
+</permissions>

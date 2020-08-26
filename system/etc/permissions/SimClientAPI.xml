@@ -1,0 +1,4 @@
+<permissions>
+    <library name="amazon.speech.simclientapi"
+            file="/system/framework/SimClientAPI.jar"/>
+</permissions>

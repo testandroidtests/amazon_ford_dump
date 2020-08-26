@@ -1,0 +1,4 @@
+<permissions>
+  <library name="amazon.speech.csmoptions"
+           file="/system/framework/csmoptions.jar"/>
+</permissions>

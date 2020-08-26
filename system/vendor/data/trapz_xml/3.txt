@@ -1,0 +1,183 @@
+            
+      <component cat="2" fullSymbol="TRAPZ_APP_LAUNCHER" id="2003" name="Launcher" symbol="LAUNCHER"/>
+      <component cat="2" fullSymbol="TRAPZ_APP_READER" id="2004" name="Reader" symbol="READER"/>
+      <component cat="2" fullSymbol="TRAPZ_APP_TEST" id="2005" name="ATest" symbol="TEST">
+        <description>Apps test component for ad hoc use (do not commit tracing that uses these components)</description>
+        <component cat="2" fullSymbol="TRAPZ_APP_TEST_1" id="2006" name="ATest1" symbol="1"/>
+        <component cat="2" fullSymbol="TRAPZ_APP_TEST_2" id="2007" name="ATest2" symbol="2"/>
+        <component cat="2" fullSymbol="TRAPZ_APP_TEST_3" id="2008" name="ATest3" symbol="3"/>
+        <component cat="2" fullSymbol="TRAPZ_APP_TEST_4" id="2009" name="ATest4" symbol="4"/>
+      </component>
+    </component>
+    <component cat="4" fullSymbol="TRAPZ_INJECTION" id="1999" name="injectTrace" symbol="INJECTION">
+      <trace file="fireos/libs/perf/trapz/libs/injection.c" id="0" name="injectTrace" symbol="injectTrace">
+        <description>injected tracepoint</description>
+      </trace>
+    </component>
+    <component cat="3" fullSymbol="TRAPZ_LogCat" id="0" name="LogCat" symbol="LogCat">
+      <component cat="3" fullSymbol="TRAPZ_LogCat_Log" id="1" name="Log" symbol="Log"/>
+    </component>
+  </component>
+<xsl:stylesheet id="stylesheet" version="1.0"
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+  <xsl:output method="html"/>
+
+  <xsl:template match="/">
+    <html>
+      <head>
+    <style type="text/css">
+      <!-- Styled by <stevcox@lab126.com> -->
+      body {
+        font-family:sans-serif
+      }
+      th {
+        background-color:#688799;
+            color:white;
+        padding:8px;
+        border:1px solid #999
+      }
+      tr.component td {
+            background-color:#ddd
+      }
+      table {
+        empty-cells:show;
+        border-collapse:collapse;
+        font-family:sans-serif;
+        font-size:80%
+          }
+      td {
+        border:1px solid #999;
+        padding:4px
+      }
+      tr.trace td {
+        font-weight:normal
+      }
+    </style>
+    <title>TRAPZ</title>
+      </head>
+      <body>
+    <xsl:apply-templates select="/trapz/component"/>
+    <xsl:apply-templates select="/trapz"/>
+      </body>
+    </html>
+  </xsl:template>
+
+  <xsl:template match="/trapz/component">
+    <h1>TRAPZ Components and Traces</h1>
+    <b>Note:</b> This file contains links to a source tree rooted at file:///srcroot. You will need to create a symbolic link in your filesystem if you want those links to work. Try something like:
+    <pre>
+      sudo ln -s /home/&lt;userid&gt;/&lt;branch&gt; /srcroot
+    </pre>
+    <p/>
+    <table>
+      <tr>
+    <th>What</th>
+    <th>Full Symbol</th>
+    <th>Name</th>
+    <!-- <th>Symbol</th> -->
+    <th>Category</th>
+    <th>ID</th>
+    <th>Description</th>
+      </tr>
+      <xsl:apply-templates select="/trapz/component/component"/>
+    </table>
+    <br/>
+  </xsl:template>
+
+  <xsl:template match="/trapz">
+    <xsl:if test="event">
+      <h1>TRAPZ Events</h1>
+      <table>
+    <tr>
+      <th>Seq</th>
+      <th>Timestamp</th>
+      <th>CPU</th>
+      <th>PID</th>
+      <th>TID</th>
+      <th>Cat</th>
+      <th>Component</th>
+      <th>Trace</th>
+      <th>E1</th>
+      <th>E2</th>
+      <th>E3</th>
+      <th>E4</th>
+    </tr>
+    <xsl:apply-templates select="event"/>
+      </table>
+    </xsl:if>
+  </xsl:template>
+
+  <xsl:template match="component">
+    <tr class="component"><xsl:attribute name="id"><xsl:value-of select="@name"/></xsl:attribute>
+      <td>Component</td>
+      <td>
+    <xsl:for-each select="ancestor::*"><xsl:value-of select="@symbol"/>_</xsl:for-each>
+    <xsl:value-of select="@symbol"/>
+      </td>
+      <td><xsl:value-of select="@name"/></td>
+      <!-- <td><xsl:value-of select="@symbol"/></td> -->
+      <td><xsl:value-of select="@cat"/></td>
+      <td><xsl:value-of select="@id"/></td>
+      <td><xsl:value-of select="description/text()"/></td>
+    </tr>
+    <xsl:apply-templates select="trace"/>
+    <xsl:apply-templates select="component"/>
+  </xsl:template>
+
+  <xsl:template match="trace">
+    <tr class="trace">
+      <xsl:attribute name="id"><xsl:value-of select="@name"/></xsl:attribute>
+      <td>Trace</td>
+      <td/>
+      <td>
+    <xsl:choose>
+      <xsl:when test="starts-with(@file,'/')">
+        <a><xsl:attribute name="href">file://<xsl:value-of select="@file"/></xsl:attribute><xsl:value-of select="@name"/></a>
+      </xsl:when>
+      <xsl:when test="@file">
+        <a><xsl:attribute name="href">file:///srcroot/<xsl:value-of select="@file"/></xsl:attribute><xsl:value-of select="@name"/></a>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="@name"/>
+      </xsl:otherwise>
+    </xsl:choose>
+      </td>
+      <!-- <td><xsl:value-of select="@symbol"/></td> -->
+      <td><xsl:value-of select="@cat"/></td>
+      <td><xsl:value-of select="@id"/></td>
+      <td><xsl:value-of select="description/text()"/></td>
+    </tr>
+  </xsl:template>
+
+  <xsl:template match="event">
+    <xsl:variable name="category" select="@category"/>
+    <xsl:variable name="compId" select="@compId"/>
+    <xsl:variable name="traceId" select="@traceId"/>
+    <xsl:variable name="compNode" select="//component[@cat=$category and @id=$compId]"/>
+    <xsl:variable name="compName" select="$compNode/@name"/>
+    <xsl:variable name="traceName" select="$compNode/trace[@id=$traceId]/@name"/>
+    <xsl:variable name="hundredths" select="substring(substring-after(@timestamp,'.'),1,2)"/>
+    <tr class="event">
+      <td><xsl:value-of select="@sequence"/></td>
+      <td>
+    <xsl:attribute name="style">background-color:rgb(<xsl:value-of select="$hundredths + 156"/>, <xsl:value-of select="$hundredths + 156"/>, <xsl:value-of select="$hundredths + 156"/>)</xsl:attribute>
+        <xsl:value-of select="@timestamp"/>
+      </td>
+      <td><xsl:value-of select="@cpu"/></td>
+      <td><xsl:value-of select="@pid"/></td>
+      <td><xsl:value-of select="@tid"/></td>
+      <td><xsl:value-of select="@category"/></td>
+      <td><a><xsl:attribute name="href">#<xsl:value-of select="$compName"/></xsl:attribute><xsl:value-of select="$compName"/></a></td>
+      <td><a><xsl:attribute name="href">#<xsl:value-of select="$traceName"/></xsl:attribute><xsl:value-of select="$traceName"/></a></td>
+      <td><xsl:value-of select="@e1"/></td>
+      <td><xsl:value-of select="@e2"/></td>
+      <td><xsl:value-of select="@e3"/></td>
+      <td><xsl:value-of select="@e4"/></td>
+    </tr>
+  </xsl:template>
+
+  <!-- suppress text nodes -->
+  <xsl:template match="text()"/>
+
+</xsl:stylesheet>

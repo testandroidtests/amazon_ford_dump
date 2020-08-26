@@ -1,0 +1,4 @@
+<permissions>
+  <library name="amazon.speech.speechserviceutil"
+	   file="/system/framework/speechserviceutil.jar"/>
+</permissions>

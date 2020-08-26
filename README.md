@@ -1,0 +1,13 @@
+# full_ford-user 5.1.1 LVY48F 37.6.2.6_user_626533320 release-keys
+- manufacturer: amazon
+- platform: mt8127
+- codename: ford
+- flavor: full_ford-user
+- release: 5.1.1
+- id: LVY48F
+- incremental: 37.6.2.6_user_626533320
+- tags: release-keys
+- fingerprint: Amazon/full_ford/ford:5.1.1/LVY48F/37.6.2.6_user_626533320:user/release-keys
+- brand: Amazon
+- branch: full_ford-user-5.1.1-LVY48F-37.6.2.6_user_626533320-release-keys
+- repo: amazon_ford_dump

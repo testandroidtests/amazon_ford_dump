@@ -1,0 +1,4 @@
+<permissions>
+  <library name="amazon.speech.csmmetricsutils"
+           file="/system/framework/CsmMetricsUtils.jar"/>
+</permissions>

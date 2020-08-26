@@ -1,0 +1,226 @@
+<?xml version="1.0" ?>
+<!DOCTYPE trapz [<!ATTLIST xsl:stylesheet id ID #REQUIRED>]>
+<?xml-stylesheet type="text/xsl" href="#stylesheet"?>
+<trapz version="0.3">
+  <component cat="4" fullSymbol="TRAPZ" id="0" name="Trapz" symbol="TRAPZ">
+    <component cat="0" fullSymbol="TRAPZ_KERN" id="1" name="Kernel" symbol="KERN">
+      <description>Kernel component is used for all kernel logging</description>
+      <scan dir="kernel"/>
+      <component cat="0" fullSymbol="TRAPZ_KERN_SCHED" id="2" name="Scheduler" symbol="SCHED">
+        <description>Scheduler component traces all context switches</description>
+        <component cat="0" fullSymbol="TRAPZ_KERN_SCHED_IDLE" id="3" name="Idle" symbol="IDLE"/>
+        <trace file="kernel/mediatek/mt8127/3.10/kernel/sched/core.c" id="0" name="CtxSw" symbol="CtxSw">
+          <description>Logs prev and next pids on a context switch.</description>
+        </trace>
+        <trace file="kernel/mediatek/mt8127/3.10/fs/exec.c" id="1" name="TaskComm" symbol="TaskComm">
+          <description>bytes 0..15 of tsk-&gt;comm</description>
+        </trace>
+      </component>
+      <component cat="0" fullSymbol="TRAPZ_KERN_FS" id="4" name="Filesystem" symbol="FS">
+        <description>Trace Filesystem Read/Write I/O</description>
+        <component cat="0" fullSymbol="TRAPZ_KERN_FS_FIO" id="5" name="FileIO" symbol="FIO"/>
+      </component>
+      <component cat="0" fullSymbol="TRAPZ_KERN_SND" id="6" name="Sound" symbol="SND">
+        <trace file="kernel/mediatek/mt8127/3.10/sound/core/pcm_native.c" id="0" name="PcmWrite" symbol="PcmWrite">
+          <description>Logs ioctl writes to PCM sound device</description>
+        </trace>
+      </component>
+      <component cat="0" fullSymbol="TRAPZ_KERN_INP" id="7" name="Input" symbol="INP">
+        <component cat="0" fullSymbol="TRAPZ_KERN_INP_TOUCH" id="8" name="Touch" symbol="TOUCH"/>
+      </component>
+      <component cat="0" fullSymbol="TRAPZ_KERN_DISP" id="9" name="Display" symbol="DISP">
+        <component cat="0" fullSymbol="TRAPZ_KERN_DISP_DSS" id="10" name="DssDriver" symbol="DSS"/>
+        <component cat="0" fullSymbol="TRAPZ_KERN_DISP_PVR" id="11" name="PvrDriver" symbol="PVR">
+          <component cat="0" fullSymbol="TRAPZ_KERN_DISP_PVR_TUNE" id="12" name="PvrTune" symbol="TUNE"/>
+          <description>This component is used for automatic insertion of PVRTune events (do not commit tracing that uses this component)</description>
+        </component>
+        <trace file="kernel/mediatek/mt8127/3.10/drivers/misc/mediatek/video/mt8127/disp_drv.c" id="0" name="Vsyncirq" symbol="Vsyncirq">
+          <description>Primary VSYNC interrupt</description>
+        </trace>
+      </component>
+      <component cat="0" fullSymbol="TRAPZ_KERN_ABE" id="13" name="AudioABE" symbol="ABE"/>
+      <component cat="0" fullSymbol="TRAPZ_KERN_PCM" id="14" name="Pcm" symbol="PCM"/>
+      <component cat="0" fullSymbol="TRAPZ_KERN_DVFS" id="15" name="DVFS" symbol="DVFS"/>
+      <component cat="0" fullSymbol="TRAPZ_KERN_CPU" id="16" name="CPU" symbol="CPU">
+        <trace file="kernel/mediatek/mt8127/3.10/drivers/cpufreq/cpufreq.c" formatString="cpu freq=%d" id="0" name="CPUFreq" symbol="CPUFreq">
+          <description>CPU Frequency Change</description>
+        </trace>
+      </component>
+      <component cat="0" fullSymbol="TRAPZ_KERN_CPUFREQ" id="17" name="CpuFreq" symbol="CPUFREQ"/>
+      <component cat="0" fullSymbol="TRAPZ_KERN_CPUIDLE" id="18" name="CpuIdle" symbol="CPUIDLE"/>
+      <component cat="0" fullSymbol="TRAPZ_KERN_RPMSG" id="19" name="Rpmsg" symbol="RPMSG"/>
+      <component cat="0" fullSymbol="TRAPZ_KERN_MMC" id="20" name="eMMC" symbol="MMC"/>
+      <component cat="0" fullSymbol="TRAPZ_KERN_NET" id="21" name="Net" symbol="NET">
+        <component cat="0" fullSymbol="TRAPZ_KERN_NET_WIFI" id="22" name="Wifi" symbol="WIFI">
+          <scan dir="external/compat-wireless/drivers/net/wireless/ath/ath6kl-3.5"/>
+          <scan dir="hardware/broadcom/wlan"/>
+          <scan dir="kernel/omap/drivers/net/wireless"/>
+        </component>
+        <component cat="0" fullSymbol="TRAPZ_KERN_NET_SOCK" id="23" name="Socket" symbol="SOCK"/>
+      </component>
+      <component cat="0" fullSymbol="TRAPZ_KERN_MEM" id="24" name="Memory" symbol="MEM"/>
+      <component cat="0" fullSymbol="TRAPZ_KERN_TEST" id="25" name="KTest" symbol="TEST">
+        <description>Kernel test component for ad hoc use (do not commit tracing that uses these components)</description>
+        <component cat="0" fullSymbol="TRAPZ_KERN_TEST_1" id="26" name="KTest1" symbol="1"/>
+        <component cat="0" fullSymbol="TRAPZ_KERN_TEST_2" id="27" name="KTest2" symbol="2"/>
+        <component cat="0" fullSymbol="TRAPZ_KERN_TEST_3" id="28" name="KTest3" symbol="3"/>
+        <component cat="0" fullSymbol="TRAPZ_KERN_TEST_4" id="29" name="KTest4" symbol="4"/>
+      </component>
+    </component>
+    <component cat="1" fullSymbol="TRAPZ_PLAT" id="30" name="Platform" symbol="PLAT">
+      <scan dir="frameworks/base"/>
+      <scan dir="frameworks/native"/>
+      <component cat="1" fullSymbol="TRAPZ_PLAT_VIEWJNI" id="31" name="ViewJni" symbol="VIEWJNI">
+        <component cat="1" fullSymbol="TRAPZ_PLAT_VIEWJNI_INPUT" id="32" name="Input" symbol="INPUT"/>
+      </component>
+      <component cat="1" fullSymbol="TRAPZ_PLAT_BINDER" id="33" name="Binder" symbol="BINDER">
+        <component cat="1" fullSymbol="TRAPZ_PLAT_BINDER_PROXY" id="34" name="Proxy" symbol="PROXY">
+          <trace file="frameworks/base/core/jni/android_util_Binder.cpp" id="0" name="Transact" perTid="1" scope="1" symbol="Transact">
+            <description>Binder IPC Transaction @pertid</description>
+          </trace>
+          <trace file="frameworks/base/core/jni/android_util_Binder.cpp" formatString="sent: %d; received: %d; code: %d; flags: %d" id="1" name="TransactCompleteSuccess" perTid="1" symbol="TransactCompleteSuccess">
+            <description>Binder IPC Transaction Completed Successfully @pertid</description>
+          </trace>
+        </component>
+      </component>
+      <scan dir="dalvik"/>
+      <component cat="1" fullSymbol="TRAPZ_PLAT_DALVIK" id="35" name="Dalvik" symbol="DALVIK">
+        <scan dir="art/runtime/gc"/>
+        <component cat="1" fullSymbol="TRAPZ_PLAT_DALVIK_GC" id="36" name="GarbageCollector" symbol="GC">
+          <trace file="art/runtime/gc/heap.cc" id="0" name="ConcurrentGC" scope="1" symbol="ConcurrentGC">
+            <description>Garbage Collector Concurrent</description>
+          </trace>
+          <trace file="art/runtime/gc/heap.cc" id="1" name="NonConcurrentGC" scope="1" symbol="NonConcurrentGC">
+            <description>Garbage Collector NonConcurrent</description>
+          </trace>
+          <trace file="art/runtime/gc/heap.cc" formatString="numBytesFreed %d; currAllocated %d" id="2" name="ConcurrentGCFreedAlloc" symbol="ConcurrentGCFreedAlloc">
+            <description>Garbage Collector Concurrent - Detail</description>
+          </trace>
+          <trace file="art/runtime/gc/heap.cc" formatString="numBytesFreed %d; currAllocated %d" id="3" name="NonConcurrentGCFreedAlloc" symbol="NonConcurrentGCFreedAlloc">
+            <description>Garbage Collector NonConcurrent - Detail</description>
+          </trace>
+        </component>
+      </component>
+      <component cat="1" fullSymbol="TRAPZ_PLAT_HWUI" id="37" name="HardwareUI" symbol="HWUI">
+        <component cat="1" fullSymbol="TRAPZ_PLAT_HWUI_RENDERER" id="38" name="OpenGLRenderer" symbol="RENDERER"/>
+        <component cat="1" fullSymbol="TRAPZ_PLAT_HWUI_TXTCACHE" id="39" name="TextureCache" symbol="TXTCACHE"/>
+      </component>
+      <component cat="1" fullSymbol="TRAPZ_PLAT_EGL" id="40" name="Egl" symbol="EGL">
+        <component cat="1" fullSymbol="TRAPZ_PLAT_EGL_JNIBINDING" id="41" name="JniBinding" symbol="JNIBINDING">
+          <trace file="frameworks/native/opengl/libs/EGL/eglApi.cpp" id="0" name="eglCreateWindowSurface" symbol="eglCreateWindowSurface">
+            <description>creates a new EGL window surface</description>
+          </trace>
+          <trace file="frameworks/native/opengl/libs/EGL/eglApi.cpp" id="1" name="eglMakeCurrent" symbol="eglMakeCurrent">
+            <description>binds EGL context to the current rendering thread</description>
+          </trace>
+          <trace file="frameworks/native/opengl/libs/EGL/eglApi.cpp" id="2" name="eglSwapBuffers" symbol="eglSwapBuffers">
+            <description>posts EGL surface to a native window</description>
+          </trace>
+        </component>
+      </component>
+      <component cat="1" fullSymbol="TRAPZ_PLAT_UI" id="42" name="LibUI" symbol="UI">
+        <component cat="1" fullSymbol="TRAPZ_PLAT_UI_AB" id="43" name="AppBuffer" symbol="AB"/>
+        <component cat="1" fullSymbol="TRAPZ_PLAT_UI_FB" id="44" name="FrameBuffer" symbol="FB"/>
+        <component cat="1" fullSymbol="TRAPZ_PLAT_UI_INPUT" id="45" name="Input" symbol="INPUT">
+          <trace file="frameworks/native/services/inputflinger/InputReader.cpp" id="0" name="PrepareDispatchMotion" symbol="PrepareDispatchMotion">
+            <description>Notifies listeners of motion events</description>
+          </trace>
+          <trace file="frameworks/native/services/inputflinger/InputDispatcher.cpp" id="1" name="GetInputEvent" symbol="GetInputEvent">
+            <description>Android System Server receives keypress event. extra1 = deviceID; extra2 = keycode; extra3 = 0 up  1 down  2 repeat. deviceID = 0 is the built in keyboard. See 'linux/input.h' for list of all keycodes.</description>
+          </trace>
+          <trace file="frameworks/native/services/inputflinger/EventHub.cpp" id="2" name="GetInputEventPosition" symbol="GetInputEventPosition">
+            <description>Android System Server receives positioning event. extra1 = deviceID; extra2 = 2 for REL  3 for ABS; extra3 = 0 if extra4 is an X  1 if extra4 is a Y; extra4 = X or Y value. deviceID = 0 is the built in keyboard. See 'linux/input.h' for list of all codes.</description>
+          </trace>
+        </component>
+        <component cat="1" fullSymbol="TRAPZ_PLAT_UI_DT" id="46" name="DirectTexture" symbol="DT"/>
+      </component>
+      <component cat="1" fullSymbol="TRAPZ_PLAT_SF" id="47" name="SurfaceFlinger" symbol="SF">
+        <component cat="1" fullSymbol="TRAPZ_PLAT_SF_CLIENT" id="48" name="SurfaceFlingerClient" symbol="CLIENT"/>
+      </component>
+      <component cat="1" fullSymbol="TRAPZ_PLAT_REC" id="49" name="AudioRecord" symbol="REC"/>
+      <component cat="1" fullSymbol="TRAPZ_PLAT_PLAYER" id="50" name="AudioPlayer" symbol="PLAYER"/>
+      <component cat="1" fullSymbol="TRAPZ_PLAT_TRACK" id="51" name="TrackPlayer" symbol="TRACK">
+        <trace file="frameworks/av/services/audioflinger/Tracks.cpp" id="0" name="startTrack" symbol="startTrack">
+          <description>TrackPlayer</description>
+        </trace>
+      </component>
+      <scan dir="frameworks/av"/>
+      <component cat="1" fullSymbol="TRAPZ_PLAT_MIXER" id="52" name="AudioMixer" symbol="MIXER"/>
+      <component cat="1" fullSymbol="TRAPZ_PLAT_TINYALSA" id="53" name="TinyAlsa" symbol="TINYALSA">
+        <scan dir="external/tinyalsa"/>
+        <trace file="external/tinyalsa/pcm.c" id="0" name="pcm_mmap_write_areas" symbol="pcm_mmap_write_areas">
+          <description>TINYALSA</description>
+        </trace>
+      </component>
+      <component cat="1" fullSymbol="TRAPZ_PLAT_SKIA" id="54" name="Skia" symbol="SKIA">
+        <scan dir="external/skia"/>
+        <component cat="1" fullSymbol="TRAPZ_PLAT_SKIA_JPEG" id="55" name="SkJPEGImageDecoder" symbol="JPEG"/>
+        <component cat="1" fullSymbol="TRAPZ_PLAT_SKIA_PNG" id="56" name="SkPNGImageDecoder" symbol="PNG"/>
+      </component>
+      <component cat="1" fullSymbol="TRAPZ_PLAT_TEST" id="57" name="PTest" symbol="TEST">
+        <description>Platform test component for ad hoc use (do not commit tracing that uses these components)</description>
+        <component cat="1" fullSymbol="TRAPZ_PLAT_TEST_BENCH" id="58" name="TrapzBench" symbol="BENCH">
+          <scan dir="fireos/libs/perf/trapz/libs"/>
+          <description>Trapz.cpp benchmarks Trapz performance using this component</description>
+          <trace file="fireos/libs/perf/trapz/libs/Trapz.cpp" id="0" name="Ping" symbol="Ping"/>
+          <trace file="fireos/libs/perf/trapz/libs/Trapz.cpp" id="1" name="Pong" symbol="Pong"/>
+          <trace file="fireos/libs/perf/trapz/libs/Trapz.cpp" id="2" name="Usleep0" symbol="Usleep0"/>
+          <trace file="fireos/libs/perf/trapz/libs/Trapz.cpp" id="3" name="Usleep1" symbol="Usleep1"/>
+          <trace file="fireos/libs/perf/trapz/libs/Trapz.cpp" id="4" name="Usleep10" symbol="Usleep10"/>
+          <trace file="fireos/libs/perf/trapz/libs/Trapz.cpp" id="5" name="Usleep100" symbol="Usleep100"/>
+          <trace file="fireos/libs/perf/trapz/libs/Trapz.cpp" id="6" name="Usleep1000" symbol="Usleep1000"/>
+        </component>
+        <component cat="1" fullSymbol="TRAPZ_PLAT_TEST_1" id="59" name="PTest1" symbol="1"/>
+        <component cat="1" fullSymbol="TRAPZ_PLAT_TEST_2" id="60" name="PTest2" symbol="2"/>
+        <component cat="1" fullSymbol="TRAPZ_PLAT_TEST_3" id="61" name="PTest3" symbol="3"/>
+        <component cat="1" fullSymbol="TRAPZ_PLAT_TEST_4" id="62" name="PTest4" symbol="4"/>
+      </component>
+      <scan dir="fireos/libs/perf/trapz/libs"/>
+      <scan dir="hardware/ti/omap4xxx"/>
+      <scan dir="hardware/qcom"/>
+      <component cat="1" fullSymbol="TRAPZ_PLAT_HWC" id="63" name="HardwareComposer" symbol="HWC">
+        <trace file="fireos/libs/perf/trapz/libs/hwc.c" id="0" name="HWCVsync" symbol="HWCVsync">
+          <description>HW composer wait for vsync</description>
+        </trace>
+        <trace file="fireos/libs/perf/trapz/libs/hwc.c" id="1" name="HWCFrameUpdate" symbol="HWCFrameUpdate">
+          <description>Every update to the display will trigger this event when the surfaces are presented to the display subsystem - sometime during the frame before the images are _actually_ displayed.</description>
+        </trace>
+        <trace file="fireos/libs/perf/trapz/libs/hwc.c" id="2" name="HwcPrepare" symbol="HwcPrepare">
+          <description>Prepare Hardware Composer for a composition and log the hwc syncid</description>
+        </trace>
+        <trace file="fireos/libs/perf/trapz/libs/hwc.c" id="3" name="HWCPost2" symbol="HWCPost2">
+          <description>HW composer commit: Post2</description>
+        </trace>
+      </component>
+      <component cat="1" fullSymbol="TRAPZ_PLAT_AWV" id="2000" name="AWV" symbol="AWV">
+        <component cat="1" fullSymbol="TRAPZ_PLAT_AWV_EMBEDDED" id="2001" name="AWVEmbedded" symbol="EMBEDDED">
+          <trace file="fireos/libs/perf/trapz/libs/awv.c" id="0" name="AWV_eglSwapBuffers" symbol="AWV_eglSwapBuffers">
+            <description>AWV Swap buffers</description>
+          </trace>
+          <trace file="fireos/libs/perf/trapz/libs/awv.c" id="1" name="AWV_fetchStart" symbol="AWV_fetchStart">
+            <description>AWV fetch Start</description>
+          </trace>
+          <trace file="fireos/libs/perf/trapz/libs/awv.c" id="2" name="AWV_requestStart" symbol="AWV_requestStart">
+            <description>AWV request Start</description>
+          </trace>
+          <trace file="fireos/libs/perf/trapz/libs/awv.c" id="3" name="AWV_responseStart" symbol="AWV_responseStart">
+            <description>AWV response Start</description>
+          </trace>
+          <trace file="fireos/libs/perf/trapz/libs/awv.c" id="4" name="AWV_responseEnd" symbol="AWV_responseEnd">
+            <description>AWV response End</description>
+          </trace>
+          <trace file="fireos/libs/perf/trapz/libs/awv.c" id="5" name="AWV_domLoading" symbol="AWV_domLoading">
+            <description>AWV dom Loading</description>
+          </trace>
+          <trace file="fireos/libs/perf/trapz/libs/awv.c" id="6" name="AWV_domComplete" symbol="AWV_domComplete">
+            <description>AWV dom Complete</description>
+          </trace>
+          <trace file="fireos/libs/perf/trapz/libs/awv.c" id="7" name="AWV_loadEventEnd" symbol="AWV_loadEventEnd">
+            <description>AWV load Event End</description>
+          </trace>
+          <trace file="fireos/libs/perf/trapz/libs/awv.c" id="8" name="AWV_aboveTheFoldMark" symbol="AWV_aboveTheFoldMark">
+            <description>AWV above Fold Mark</description>
+          </trace>
+        </component>
+      </component>
+                  

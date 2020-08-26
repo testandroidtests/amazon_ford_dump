@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<permissions>
+<library name="com.fireos.sdk.precog" file="/system/framework/precog-api.jar"/>
+<feature name="com.fireos.sdk.precog" version="4"/>
+</permissions>

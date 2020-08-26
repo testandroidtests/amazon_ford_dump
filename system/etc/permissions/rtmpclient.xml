@@ -1,0 +1,3 @@
+<permissions>
+    <library name="rtmpclient" file="/system/framework/rtmpclient.jar"/>
+</permissions>

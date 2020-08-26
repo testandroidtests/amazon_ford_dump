@@ -1,0 +1,28 @@
+isSystemServer=true domain=system_server
+user=system domain=system_app type=system_app_data_file
+user=bluetooth domain=bluetooth type=bluetooth_data_file
+user=nfc domain=nfc type=nfc_data_file
+user=radio domain=radio type=radio_data_file
+user=shared_relro domain=shared_relro
+user=shell domain=shell type=shell_data_file
+user=_isolated domain=isolated_app
+user=_app seinfo=platform domain=platform_app type=app_data_file
+user=_app seinfo=amazonapp domain=amazon_app type=app_data_file
+user=_app seinfo=amazonlogapp domain=amazon_log_app type=app_data_file
+user=_app seinfo=amazonmedia domain=amazon_media_app type=app_data_file
+user=_app seinfo=amazonwpapp domain=amazon_wp_app type=app_data_file
+user=_app seinfo=amazondfuapp domain=amazon_dfu_app type=app_data_file
+user=_app seinfo=amazonauthapp domain=amazon_auth_app type=app_data_file
+user=_app seinfo=amazonbtapp domain=amazon_bt_app type=app_data_file
+user=_app seinfo=amazonotaapp domain=amazon_ota_app type=app_data_file
+user=_app seinfo=amazonremotecontrolapp domain=amazon_remotecontrol_app type=app_data_file
+user=_app seinfo=amazoncontrollerapp domain=amazon_controller_app type=app_data_file
+user=_app seinfo=amazonheadlessoobeapp domain=amazon_headlessoobe_app type=app_data_file
+user=_app seinfo=amazonuploaderapp domain=amazon_uploader_app type=app_data_file
+user=_app seinfo=amazonkorapp domain=amazon_kor_app type=app_data_file
+user=_app seinfo=amazonecsapp domain=amazon_ecs_app type=app_data_file
+user=_app seinfo=amazongadgetscontrolapp domain=amazon_gadgetscontrol_app type=app_data_file
+user=_app seinfo=amazonedgeapp domain=amazon_edge_app type=app_data_file
+user=_app seinfo=speechinteractionmanager domain=speech_interaction_manager type=app_data_file
+user=_app seinfo=ftvbindcoresettings domain=bind_core_settings type=app_data_file
+user=_app domain=untrusted_app type=app_data_file

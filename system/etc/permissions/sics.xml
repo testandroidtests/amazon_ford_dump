@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<permissions>
+<library name="com.fireos.sdk.sics" file="/system/framework/com.amazon.sics.jar"/>
+<feature name="com.fireos.sdk.sics" version="1"/>
+<library name="com.fireos.sdk.sics" file="/system/framework/com.amazon.sics.jar"/>
+<feature name="com.fireos.sdk.sics" version="1"/>
+</permissions>

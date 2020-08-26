@@ -1,0 +1,4 @@
+<permissions>
+  <library name="amazon.speech.idoperations"
+           file="/system/framework/IdOperations.jar"/>
+</permissions>

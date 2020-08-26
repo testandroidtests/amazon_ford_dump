@@ -1,0 +1,3 @@
+<permissions>
+    <library name="amazon-ads-registration" file="/system/framework/amazon-ads-registration.jar"/>
+</permissions>

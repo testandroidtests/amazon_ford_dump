@@ -1,0 +1,3 @@
+<permissions>
+    <library name="com.amazon.enhancedcamera" file="/system/framework/EnhancedCameraAPI.jar"/>
+</permissions>
